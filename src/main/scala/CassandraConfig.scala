@@ -7,7 +7,8 @@ object CassandraConfig{
     val keySpace="demo"
     val session = cluster.connect(keySpace)
   //TODO create table if it does not exist
-/*CREATE TABLE Quotes ( symbol text,
+  /*CREATE KEYSPACE demo WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}
+CREATE TABLE Quotes ( symbol text,
                         value  double,
                         time  long,
                         name  text,

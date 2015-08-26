@@ -12,8 +12,10 @@ object CassandraReaderActor extends Actor {
   def receive: Receive = {
     case ft: Future[Any] => ft.onComplete {
       case Success(x) => x match {
-        case quotes: List[Quotes] => println("received quotes,writing to db")
-          cassandra ! quotes
+        case qts: Quotes => println("received quotes,writing to db")
+                             cassandra ! qts.quotes
+        case qlist: List[Quotes] => println("received quotes,writing to db")
+          cassandra ! qlist
       }
       case Failure(e) => e.printStackTrace
     }
