@@ -18,6 +18,6 @@ object Boot extends App {
   IO(Http) ! Http.Bind(restService, "localhost", 1080)
 
   println("server started")
-  system.scheduler.schedule(0 seconds, 2 minutes, read, FERates.getRates)
+  system.scheduler.schedule(0 seconds, 2 minutes, read, FetchQuotes)
 
 }

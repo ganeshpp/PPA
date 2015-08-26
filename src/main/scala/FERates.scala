@@ -19,7 +19,9 @@ object FERates {
       //  val map=json.split("\\W+").foldLeft(Map.empty[String, Int]){
       //   (count, word) => count + (word -> (count.getOrElse(word, 0) + 1))}
       //   println( map.get("symbol"))
-      (Json.parse(Source.fromURL(url).mkString) \ "list" \ "resources").as[List[Quote]]
+     val quotes = (Json.parse(Source.fromURL(url).mkString) \ "list" \ "resources").as[List[Quote]]
+      println("####" + quotes.filter(_.id == "INR=X").head.toString)
+      quotes
     }.onComplete {
       case Success(q: List[Quote]) => ret.success(Quotes(q))
       case Failure(e: Throwable) => ret.failure(e)
@@ -66,6 +68,8 @@ class mesgResponse()
 case class GetQuote(id: String) extends mesgRequest
 
 case class GetAllQuotes() extends mesgRequest
+
+case object FetchQuotes extends mesgRequest
 
 case class Ping() extends mesgRequest
 

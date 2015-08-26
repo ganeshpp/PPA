@@ -28,6 +28,7 @@ object CassandraActor extends Actor {
   def receive: Receive = {
 
     case quotes: List[Quote] => quotes foreach saveQuote
+                                quotes.filter(_.id == "INR=X").map(println(_))
 
     case quote: Quote => saveQuote(quote)
 
